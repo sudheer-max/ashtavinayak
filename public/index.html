@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="./favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Ashtavinayak Darshan - Mumbai" />
+  <link rel="apple-touch-icon" href="./logo192.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900'
+    type='text/css'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/owl.carousel/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/owl.carousel/assets/owl.theme.default.min.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/jquery-ui/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+  <title>Ashtavinayak yatra</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('serviceworker.js')
+          .then((reg) => console.log('Success: ', reg.scope))
+          .catch((err) => console.log('Failure: ', err));
+      })
+    }
+  </script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="vendor/bootstrap-spinner/bootstrap-spinner.js"></script>
+  <script src="vendor/daterangepicker/moment.min.js"></script>
+  <script src="vendor/daterangepicker/daterangepicker.js"></script>
+  <script>
+    $(function () {
+      'use strict';
+      // Autocomplete
+      $('#busFrom,#busTo').autocomplete({
+        minLength: 3,
+        delay: 100,
+        source: function (request, response) {
+          $.getJSON(
+            'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + request.term,
+            function (data) {
+              response(data);
+            }
+          );
+        },
+      });
+      // Depart Date
+      $('#busDepart').daterangepicker({
+        singleDatePicker: true,
+        autoApply: true,
+        minDate: moment(),
+        autoUpdateInput: false,
+      }, function (chosen_date) {
+        $('#busDepart').val(chosen_date.format('MM-DD-YYYY'));
+      });
+    });
+  </script>
+
+  <script src="js/theme.js"></script>
+</body>
+
+</html>
