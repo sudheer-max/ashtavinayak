@@ -44,16 +44,17 @@ const ForgotPassword = props => {
                     text-muted">Enter your Email or
                     Mobile and we’ll help you reset
                     your password.</p>
+                {errors.length > 0(
+                    <>
+                        {errors.map((err, index) => {
+                            return (
+                                <p className="text-danger" key={index}>{err}</p>
+                            )
+                        })}
+                    </>
+                )}
                 <form onSubmit={handleFormSubmit}>
-                    {errors.length > 0(
-                        <>
-                            {errors.map((err, index) => {
-                                return (
-                                    <p className="text-danger" key={index}>{err}</p>
-                                )
-                            })}
-                        </>
-                    )}
+
                     <div className="form-group">
                         <input type="text"
                             className="form-control
