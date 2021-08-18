@@ -44,7 +44,7 @@ const ForgotPassword = props => {
                     text-muted">Enter your Email or
                     Mobile and we’ll help you reset
                     your password.</p>
-                {errors.length > 0(
+                {errors.length > 0 && (
                     <>
                         {errors.map((err, index) => {
                             return (
