@@ -4,7 +4,7 @@ import userTypes from "./user.types";
 
 export const emailLoginStart = userCredentials => ({
     type: userTypes.EMAIL_LOGIN_START,
-    payload : userCredentials
+    payload: userCredentials
 });
 
 export const loginSuccess = user => ({
@@ -58,6 +58,11 @@ export const resetUserState = () => ({
 
 export const googleLoginStart = () => ({
     type: userTypes.GOOGLE_LOGIN_START
+});
+
+
+export const facebookLoginStart = () => ({
+    type: userTypes.FACEBOOK_LOGIN_START
 });
 
 

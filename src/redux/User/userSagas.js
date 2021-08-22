@@ -1,6 +1,6 @@
 import { takeLatest, call, all, put } from "@redux-saga/core/effects";
 import userTypes from "./user.types";
-import { auth, getCurrentUser, handleUserProfile, googleProvider } from "../../firebase/utils";
+import { auth, getCurrentUser, handleUserProfile, googleProvider, facebookProvider } from "../../firebase/utils";
 import { loginSuccess, logoutSuccess, registerError, resetPasswordSuccess } from "./user.actions";
 import { handleResetPasswordFuntion } from "./userHelpers";
 import { toast } from "react-toastify";
@@ -144,13 +144,30 @@ export function* onGoogleLoginStart() {
     yield takeLatest(userTypes.GOOGLE_LOGIN_START, googleLogin);
 }
 
+export function* facebookLogin() {
+    try {
+        const { user } = yield auth.signInWithPopup(facebookProvider);
+        yield getSnapshotFromUserAuth(user);
+        toast.success('User Registerd with Facebook account successfully.');
+    } catch (err) {
+        console.log(err);
+        toast.error(err.message);
+    }
+}
+
+
+export function* onFacebookLoginStart() {
+    yield takeLatest(userTypes.FACEBOOK_LOGIN_START, facebookLogin)
+}
+
 export default function* userSagas() {
     yield all([call(onEmailLoginStart),
     call(onUserAuthSession),
     call(onLogoutStart),
     call(onRegisterUserStart),
     call(onResetPasswordStart),
-    call(onGoogleLoginStart)
+    call(onGoogleLoginStart),
+    call(onFacebookLoginStart)
     ]);
 };
 

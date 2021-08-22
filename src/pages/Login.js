@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { emailLoginStart, googleLoginStart } from '../redux/User/user.actions';
+import { emailLoginStart, facebookLoginStart, googleLoginStart } from '../redux/User/user.actions';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
@@ -29,6 +29,10 @@ const Login = props => {
 
     const handleGoogleSignIn = () => {
         dispatch(googleLoginStart());
+    }
+
+    const handleFacebookSignIn = () => {
+        dispatch(facebookLoginStart());
     }
 
     const handleSubmit = (e) => {
@@ -117,11 +121,10 @@ const Login = props => {
                         social-icons-circle">
                         <li
                             className="social-icons-facebook"><Link
-                                to="#"
                                 data-toggle="tooltip"
                                 data-original-title="Log
                                 In with
-                                Facebook"><i
+                                Facebook" onClick={handleFacebookSignIn}><i
                                     className="fab
                                     fa-facebook-f"></i></Link></li>
 

@@ -1,12 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import {firebaseConfig} from './config';
+import { firebaseConfig } from './config';
 
 if (!firebase.apps.length) {
-   firebase.initializeApp(firebaseConfig);
-}else {
-   firebase.app(); // if already initialized, use that one
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // if already initialized, use that one
 }
 
 
@@ -17,10 +17,15 @@ export const firestore = firebase.firestore();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-googleProvider.setCustomParameters({ prompt : 'select_account'});
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
+facebookProvider.setCustomParameters({ prompt: 'select_account' });
 
 
-export const handleUserProfile = async ({userAuth, additionalData}) => {
+
+export const handleUserProfile = async ({ userAuth, additionalData }) => {
     if (!userAuth) return;
 
     const { uid } = userAuth;
@@ -40,7 +45,7 @@ export const handleUserProfile = async ({userAuth, additionalData}) => {
                 displayName,
                 email,
                 createdAt: timeStamps,
-                userRoles : userRoles,
+                userRoles: userRoles,
                 ...additionalData
             });
         } catch (err) {
@@ -58,4 +63,4 @@ export const getCurrentUser = () => {
             resolve(userAuth);
         }, reject);
     })
-} 
+}
