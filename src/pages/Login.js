@@ -64,7 +64,6 @@ const Login = props => {
                         <input type="email"
                             className="form-control"
                             id="emailAddress"
-                            required
                             placeholder="Mobile
                             or Email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
@@ -72,7 +71,6 @@ const Login = props => {
                         <input type="password"
                             className="form-control"
                             id="loginPassword"
-                            required
                             placeholder="Password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
                     <div className="row my-4">

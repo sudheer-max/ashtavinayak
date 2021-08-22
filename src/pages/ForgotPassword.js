@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordStart } from '../redux/User/user.actions';
 
@@ -60,7 +60,6 @@ const ForgotPassword = props => {
                             className="form-control
                             border-2"
                             id="emailAddress"
-                            required
                             placeholder="Enter Email
                             or Mobile Number" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
@@ -68,15 +67,7 @@ const ForgotPassword = props => {
                         btn-block my-4"
                         type="submit">Continue</button>
                 </form>
-                <p className="text-center mb-0"><Link
-                    className="btn-link" to="/">Return
-                    to Log In</Link> <span
-                        className="text-muted mx-3">|</span>
-                    <Link className="btn-link" to="/"
-                        data-toggle="modal"
-                        data-target="#otp-modal"
-                        data-dismiss="modal">Request
-                        OTP</Link></p>
+
             </div>
         </main>
     )

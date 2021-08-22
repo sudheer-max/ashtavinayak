@@ -77,7 +77,7 @@ const Register = props => {
                     <>
                         {errors.map((err, index) => {
                             return (
-                                <p className="invalid-feedback text-danger">{err}</p>
+                                <p className="invalid-feedback text-danger" key={index}>{err}</p>
                             )
                         })}
                     </>
@@ -87,7 +87,6 @@ const Register = props => {
                         <input type="text"
                             className="form-control
                         border-2" id="fullName"
-                            required
                             placeholder="Your Name" name="displayName" value={displayName} onChange={e => setDisplayName(e.target.value)} />
                     </div>
                     <div className="form-group">
@@ -95,7 +94,6 @@ const Register = props => {
                             className="form-control
                         border-2"
                             id="emailAddress"
-                            required
                             placeholder="Email Id"
                             name="email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
@@ -104,7 +102,6 @@ const Register = props => {
                             className="form-control
                         border-2"
                             id="loginPassword"
-                            required
                             placeholder="Password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
                     <div className="form-group">
@@ -112,7 +109,6 @@ const Register = props => {
                             className="form-control
                         border-2"
                             id="loginPassword"
-                            required
                             placeholder="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
                     </div>
                     {/* <div className="form-group my-4">

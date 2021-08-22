@@ -3,7 +3,10 @@ import userTypes from "./user.types";
 import { auth, getCurrentUser, handleUserProfile, googleProvider } from "../../firebase/utils";
 import { loginSuccess, logoutSuccess, registerError, resetPasswordSuccess } from "./user.actions";
 import { handleResetPasswordFuntion } from "./userHelpers";
+import { toast } from "react-toastify";
 
+
+toast.configure();
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
     try {
@@ -27,10 +30,13 @@ export function* emailLogin({ payload: { email, password } }) {
     try {
         const { user } = yield auth.signInWithEmailAndPassword(email, password);
         yield getSnapshotFromUserAuth(user);
+        toast.success('User Login successfully!');
+
 
 
     } catch (err) {
         console.log(err);
+        toast.error(err.message);
     }
 }
 
@@ -77,7 +83,7 @@ export function* registerUser({ payload: {
     displayName, cname, address, mobile, email, password, confirmPassword
 } }) {
     if (password !== confirmPassword) {
-        const err = ['password does not match'];
+        const err = toast.error('Password not match!');
         yield put(
             registerError(err)
         )
@@ -88,9 +94,10 @@ export function* registerUser({ payload: {
         const { user } = yield auth.createUserWithEmailAndPassword(email, password);
         const additionalData = { displayName, cname, address, mobile };
         yield getSnapshotFromUserAuth(user, additionalData);
-
+        toast.success('User Register Successfully!');
     } catch (err) {
         console.log(err);
+        toast.error(err.message);
     }
 }
 
@@ -106,6 +113,7 @@ export function* resetPassword({ payload: { email } }) {
         yield put(
             resetPasswordSuccess()
         )
+
     } catch (err) {
         // console.log(err);
         yield registerError(err)
@@ -123,9 +131,11 @@ export function* googleLogin() {
 
         const { user } = yield auth.signInWithPopup(googleProvider);
         yield getSnapshotFromUserAuth(user);
+        toast.success('User Registerd with Google account successfully');
 
     } catch (err) {
         console.log(err);
+        toast.error(err.message);
     }
 }
 
